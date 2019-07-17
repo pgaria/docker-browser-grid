@@ -1,6 +1,7 @@
 package com.demo.docker.tests;
 
 import com.demo.docker.browser.WebDriverProvider;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -20,70 +21,18 @@ public class DockerDemoTest {
     }
 
     @Test(dataProvider = "browserProvider")
-    public void runTestOnDocker(String browser,String version) throws Exception {
+    public void runTestOnDockerContainers(String browser,String version) throws Exception {
+        WebDriver driver = new WebDriverProvider().getDriver(browser,version);
 
-        WebDriverProvider driverProvider = new WebDriverProvider();
-        WebDriver driver = driverProvider.getDriver(browser,version);
         // Get URL
         driver.get("https://www.google.com/");
+        Thread.sleep(3000);
+
+        // Print Title
+        System.out.println(driver.getTitle());
+
+        // Enter the Browser Name and Version in search
+        driver.findElement(By.cssSelector("[name=q]")).sendKeys(browser+" "+version);
         Thread.sleep(10000);
-        // Print Title
-        System.out.println(driver.getTitle());
     }
-
-   /* @Test
-    public void runTestOnDockerChrome74() throws Exception {
-
-        WebDriverProvider driverProvider = new WebDriverProvider();
-        WebDriver driver = driverProvider.getDriver("chrome","74.0");
-
-        // Get URL
-        driver.get("https://www.google.com/");
-        // Print Title
-        System.out.println(driver.getTitle());
-    }
-    @Test
-    public void runTestOnDockerChrome73() throws Exception {
-
-        WebDriverProvider driverProvider = new WebDriverProvider();
-        WebDriver driver = driverProvider.getDriver("chrome","73.0");
-
-        // Get URL
-        driver.get("https://www.google.com/");
-        // Print Title
-        System.out.println(driver.getTitle());
-    }
-    @Test
-    public void runTestOnFirefox68Docker() throws Exception {
-
-        WebDriverProvider driverProvider = new WebDriverProvider();
-        WebDriver driver = driverProvider.getDriver("firefox","68.0");
-
-        // Get URL
-        driver.get("https://www.google.com/");
-        // Print Title
-        System.out.println(driver.getTitle());
-    }
-    @Test
-    public void runTestOnFirefox67Docker() throws Exception {
-
-        WebDriverProvider driverProvider = new WebDriverProvider();
-        WebDriver driver = driverProvider.getDriver("firefox","67.0");
-
-        // Get URL
-        driver.get("https://www.google.com/");
-        // Print Title
-        System.out.println(driver.getTitle());
-    }
-    @Test
-    public void runTestOnFirefox66Docker() throws Exception {
-
-        WebDriverProvider driverProvider = new WebDriverProvider();
-        WebDriver driver = driverProvider.getDriver("firefox","66.0");
-
-        // Get URL
-        driver.get("https://www.google.com/");
-        // Print Title
-        System.out.println(driver.getTitle());
-    }*/
 }

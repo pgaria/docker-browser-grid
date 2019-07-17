@@ -1,5 +1,5 @@
-<suite name="Manage" parallel="methods" data-provider-thread-count="2" >
-<test name="Manage data tests">
+<suite name="Run Test" parallel="methods" data-provider-thread-count="2" >
+<test name="Test Google search">
     <classes>
         <class name="com.demo.docker.tests.DockerDemoTest" />
     </classes>
